@@ -22,25 +22,7 @@ class RegisterCriadorController extends Controller
             'email' => 'required|string|email|max:255|unique:criadors',
             'password' => 'required|confirmed',
         ]);
-
-        // $validator = Validator::make($request->all(), [
-        //     'name' => 'required|string|max:255',
-        //     'cpf_cnpj'=>'required|string|max:14',
-        //     'data_nascimento'=>'required|date',
-        //     'telefone'=>'required|string',
-        //     'email' => 'required|string|email|max:255|unique:criadors',
-        //     'password' => 'required|confirmed',
-        // ]);
- 
-        // if ($validator->fails()) {
-
-        //     $response = [
-        //         'error' => $validator,
-        //     ];
-
-        //     return response($response,201);
-        // }                
-                        
+                                       
         $user = Criador::create([
             'name' => $request->name,
             'email' => $request->email,
