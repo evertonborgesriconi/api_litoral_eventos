@@ -40,9 +40,7 @@ class RegisterCriadorController extends Controller
 
         $response = [
             'user' => $user,
-            'token'=> $token,
-            'vali'=> $validated
-
+            'token'=> $token
         ];
 
         return response($response,201);
