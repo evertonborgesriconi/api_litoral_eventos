@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,9 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Validator;
 
-class RegisterCriadorController extends Controller
+class CriadorController extends Controller
 {
-
     public function register(Request $request)
     {
         $request->validate([
@@ -34,7 +33,7 @@ class RegisterCriadorController extends Controller
 
         //Cria um token
 
-        $token = $user->createToken('primeirotoken')->plainTextToken;
+        $token = $user->createToken('accesstoken')->plainTextToken;
 
         //Monta um objeto de retorno
 
@@ -44,5 +43,46 @@ class RegisterCriadorController extends Controller
         ];
 
         return response($response,201);
+    }
+
+    public function login(Request $request)
+    {
+    
+     $request -> validate([
+         
+         'email' => 'required|string',
+         'password' => 'required|string'
+     ]);
+ 
+     //checka o email do usuario
+ 
+         $user = Criador::where('email', $request->email)->first();
+ 
+         if (!$user || !Hash::check($request->password, $user->password)) {
+            return response([
+             'message' => 'Credenciais invalidas'
+            ], 401);
+         }
+ 
+         $token = $user->createToken('accesstoken')->plainTextToken;
+ 
+         $response = [
+             'criador' => $user,
+             'token'=> $token
+         ];
+ 
+         return response($response,201);
+ 
+    }
+
+    public function logout()
+    {
+ 
+     auth()->user()->tokens()->delete();
+     
+     return response([
+         'message' => 'Logout feito com succeso e exclusao dos tokens'
+     ]);
+ 
     }
 }

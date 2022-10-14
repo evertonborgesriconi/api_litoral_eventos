@@ -5,12 +5,20 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::post('/register', 'App\Http\Controllers\Auth\RegisterCriadorController@register');
-Route::post('/login', 'App\Http\Controllers\Auth\LoginCriadorController@login');
+Route::post('/register', 'App\Http\Controllers\CriadorController@register');
+Route::post('/login', 'App\Http\Controllers\CriadorController@login');
+
+Route::get('/categorias', 'App\Http\Controllers\CategoriaController@index');
+Route::get('/assuntos', 'App\Http\Controllers\AssuntoController@index');
+
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
-    Route::post('/logout', 'App\Http\Controllers\Auth\LoginCriadorController@logout');
+    Route::post('/logout', 'App\Http\Controllers\CriadorController@logout');
+
+    Route::post('/registerEvento', 'App\Http\Controllers\Auth\Criador\EventosController@register');
+    Route::post('/eventosIdCriador/{id}', 'App\Http\Controllers\Auth\Criador\EventosController@getEventos');
+    
   
 });
 

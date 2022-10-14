@@ -42,4 +42,11 @@ class Criador extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function eventos()
+    {
+        // relaçao 1 criador possue muitos eventos
+        
+        return $this->hasMany(Evento::class);
+    }
+
 }
