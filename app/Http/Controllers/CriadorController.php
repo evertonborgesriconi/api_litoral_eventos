@@ -85,4 +85,18 @@ class CriadorController extends Controller
      ]);
  
     }
+
+    public function indexId($id)
+    {
+        $criador= Criador::find($id);
+
+        if ($criador) {
+            
+            $response = $criador;
+              
+            return response($response, 200);
+        }else{
+            return response('criador não existe', 500);
+        }
+    }
 }

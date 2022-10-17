@@ -16,6 +16,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('/logout', 'App\Http\Controllers\CriadorController@logout');
 
+    Route::get('/criador/{id}', 'App\Http\Controllers\CriadorController@indexId');
+
     Route::post('/registerEvento', 'App\Http\Controllers\Auth\Criador\EventosController@register');
     Route::post('/eventosIdCriador/{id}', 'App\Http\Controllers\Auth\Criador\EventosController@getEventos');
     

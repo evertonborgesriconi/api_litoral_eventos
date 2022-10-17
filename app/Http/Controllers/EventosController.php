@@ -82,4 +82,21 @@ class EventosController extends Controller
             return response('criador não existe', 500);
         }
     }
+
+    public function search($name){
+
+        $evento= Evento::where('nome','like','%'.$name.'%')->get();
+
+        
+
+        if ($evento) {
+          return response($evento, 200);
+        }else{
+            return response('eventos nao encontrado', 400);
+        }
+
+        //ou tambem
+
+        //$produto= Produto::findOrFail($id);
+    }
 }
