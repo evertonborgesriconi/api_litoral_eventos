@@ -11,6 +11,7 @@ class Evento extends Model
 
     protected $fillable = [
         'id_evento',
+        'id_criador',
         'titulo_evento',
         'imagem_evento',
         'decricao_evento',
@@ -37,7 +38,7 @@ class Evento extends Model
     {
         //Relação de N para 1
 
-        return $this->belongsTo(Criador::class);
+        return $this->belongsTo(Criador::class, 'id_criador');
        
     }
 
@@ -45,7 +46,7 @@ class Evento extends Model
     {
         //Relação de N para 1
 
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(Categoria::class, 'id_categoria' );
        
     }
 
@@ -53,7 +54,7 @@ class Evento extends Model
     {
         //Relação de N para 1
 
-        return $this->belongsTo(Assunto::class);
+        return $this->belongsTo(Assunto::class, 'id_assunto');
        
     }
 }

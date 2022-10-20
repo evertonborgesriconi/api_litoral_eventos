@@ -19,6 +19,6 @@ class Assunto extends Model
 
     public function eventos()
     {
-        return $this->hasMany(Evento::class);
+        return $this->hasMany(Evento::class, 'id_evento');
     }
 }

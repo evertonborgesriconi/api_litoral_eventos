@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('cep');
             $table->string('logradouro');
             $table->string('bairro');
-            $table->integer('numero');
+            $table->string('numero');
             $table->string('cidade');
             $table->string('uf');
             $table->integer('lat');

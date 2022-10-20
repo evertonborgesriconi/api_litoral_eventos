@@ -46,7 +46,7 @@ class Criador extends Authenticatable
     {
         // relaçao 1 criador possue muitos eventos
         
-        return $this->hasMany(Evento::class);
+        return $this->hasMany(Evento::class, 'id_evento');
     }
 
 }
