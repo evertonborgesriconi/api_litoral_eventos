@@ -10,15 +10,15 @@ class Categoria extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_categoria',
+        'categoria_id',
         'nome_categoria',
         
     ];
 
-    protected $primaryKey = 'id_categoria';
+    protected $primaryKey = 'categoria_id';
 
     public function eventos()
     {
-        return $this->hasMany(Evento::class, 'id_evento');
+        return $this->hasMany(Evento::class, 'evento_id');
     }
 }

@@ -19,7 +19,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/criador/{id}', 'App\Http\Controllers\CriadorController@indexId');
 
     Route::post('/registerevento', 'App\Http\Controllers\EventosController@register');
-    Route::post('/eventosIdCriador/{id}', 'App\Http\Controllers\EventosController@getEventos');
+    Route::get('/eventosidcriador/{id}', 'App\Http\Controllers\EventosController@getEventos');
     
   
 });

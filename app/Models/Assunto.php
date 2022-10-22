@@ -10,15 +10,15 @@ class Assunto extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_assunto',
+        'assunto_id',
         'name_assunto',
         
     ];
 
-    protected $primaryKey = 'id_assunto';
+    protected $primaryKey = 'assunto_id';
 
     public function eventos()
     {
-        return $this->hasMany(Evento::class, 'id_evento');
+        return $this->hasMany(Evento::class, 'evento_id');
     }
 }

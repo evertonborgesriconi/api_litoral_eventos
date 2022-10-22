@@ -12,7 +12,7 @@ class Criador extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $fillable = [
-        'id_criador',
+        'criador_id',
         'name',
         'cpf_cnpj',
         'data_nascimento',
@@ -21,7 +21,7 @@ class Criador extends Authenticatable
         'password',
     ];
 
-    protected $primaryKey = 'id_criador';
+    protected $primaryKey = 'criador_id';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -46,7 +46,7 @@ class Criador extends Authenticatable
     {
         // relaçao 1 criador possue muitos eventos
         
-        return $this->hasMany(Evento::class, 'id_evento');
+        return $this->hasMany(Evento::class, 'evento_id');
     }
 
 }

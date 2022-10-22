@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('eventos', function (Blueprint $table) {
-            $table->id('id_evento');
-            $table->integer('id_criador');
+            $table->id('evento_id');
+            $table->foreignId('criador_id');
             $table->string('titulo_evento');
             $table->string('imagem_evento');
             $table->text('decricao_evento');
-            $table->integer('categoria');
-            $table->integer('assunto');
+            $table->foreignId('categoria_id');
+            $table->foreignId('assunto_id');
             $table->date('data_inicio');
             $table->time('hora_inicio');
             $table->date('data_termino');
@@ -31,8 +31,8 @@ return new class extends Migration
             $table->string('numero');
             $table->string('cidade');
             $table->string('uf');
-            $table->integer('lat');
-            $table->integer('lng');
+            $table->float('lat',10,6);
+            $table->float('lng',10,6);
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('criadors', function (Blueprint $table) {
-            $table->id('id_criador');
+            $table->id('criador_id');
             $table->string('name');
             $table->string('cpf_cnpj');
             $table->date('data_nascimento');
