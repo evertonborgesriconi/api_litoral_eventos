@@ -35,7 +35,7 @@ class EventosController extends Controller
             if ($request->imagem_evento) {
                 $imagem_file = time() . '.' . explode('/', explode(':', substr($request->imagem_evento, 0, strpos($request->imagem_evento, ';')))[1])[1];
 
-                Image::make($request->imagem_evento)->save(public_path('images/eventos/' . $imagem_file));
+                Image::make($request->imagem_evento)->save(storage_path('app/public/images/eventos/' . $imagem_file));
 
             }else{
                 $imagem_file = null;
@@ -89,6 +89,19 @@ class EventosController extends Controller
             return response($response,200);
         }else{
             return response('criador não existe', 500);
+        }
+    }
+
+    public function indexId($id, $criador_id)
+    {
+        $criador = Criador::find($criador_id);
+        $evento = Evento::find($id);
+        if ($criador->criador_id == $evento->criador_id) {
+            $response = $evento;
+              
+            return response($response, 200);
+        }else{
+            return response('esse evento nao pertence a esse criador', 400);
         }
     }
 
