@@ -16,7 +16,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('/logout', 'App\Http\Controllers\CriadorController@logout');
     Route::get('/criador/{id}', 'App\Http\Controllers\CriadorController@indexId');
+
     Route::post('/registerevento', 'App\Http\Controllers\EventosController@register');
+    Route::put('/editarevento/{id}', 'App\Http\Controllers\EventosController@update');
+
     Route::get('/eventosidcriador/{id}', 'App\Http\Controllers\EventosController@getEventos');
     Route::get('/eventosbyid/{id}/{criador_id}', 'App\Http\Controllers\EventosController@indexId');
     

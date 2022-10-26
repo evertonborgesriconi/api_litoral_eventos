@@ -75,6 +75,36 @@ class CriadorController extends Controller
  
     }
 
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'cpf_cnpj'=>'required|string|max:14',
+            'data_nascimento'=>'required|date',
+            'telefone'=>'required|string',
+            'email' => 'required|string|email|max:255|unique:criadors',
+            'password' => 'required|confirmed',
+        ]);
+                                       
+        Criador::where('criador_id', $id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'cpf_cnpj'=>$request->cpf_cnpj,
+            'data_nascimento'=>$request->data_nascimento,
+            'telefone'=>$request->telefone,
+            'password' => bcrypt($request->password),
+        ]);
+
+        //Monta um objeto de retorno
+
+        $response = [
+            'msg' => "Dados do criador editado com sucesso",
+            
+        ];
+
+        return response($response,201);
+    }
+
     public function logout()
     {
  
