@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Evento;
 use App\Models\Criador;
 use Illuminate\Http\Request;
