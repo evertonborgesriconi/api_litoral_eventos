@@ -30,13 +30,11 @@ class EventosController extends Controller
                 'uf' => 'required',
                 'lat' => 'required',
                 'lng' => 'required',
-
             ]);
 
             if ($request->imagem_evento) {
                 $imagem_file = time() . '.' . explode('/', explode(':', substr($request->imagem_evento, 0, strpos($request->imagem_evento, ';')))[1])[1];
-
-                Image::make($request->imagem_evento)->save(storage_path('app/public/images/eventos/' . $imagem_file));
+                Image::make($request->imagem_evento)->save(public_path('storage/images/eventos/' . $imagem_file));
 
             }else{
                 $imagem_file = null;
@@ -114,7 +112,7 @@ class EventosController extends Controller
 
                  $imagem_file = time() . '.' . explode('/', explode(':', substr($request->imagem_evento, 0, strpos($request->imagem_evento, ';')))[1])[1];
                  Image::make($request->imagem_evento)->save(storage_path('app/public/images/eventos/' . $imagem_file));
-                 
+
             }else{
                 $imagem_file = $evento->imagem_evento;
             }
