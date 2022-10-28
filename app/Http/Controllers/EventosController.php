@@ -30,9 +30,9 @@ class EventosController extends Controller
                 'uf' => 'required',
                 'lat' => 'required',
                 'lng' => 'required',
-    
+
             ]);
-                      
+
             if ($request->imagem_evento) {
                 $imagem_file = time() . '.' . explode('/', explode(':', substr($request->imagem_evento, 0, strpos($request->imagem_evento, ';')))[1])[1];
 
@@ -41,7 +41,7 @@ class EventosController extends Controller
             }else{
                 $imagem_file = null;
             }
-                     
+
             $evento = Evento::create([
                 'titulo_evento' => $request->titulo_evento,
                 'imagem_evento' => $imagem_file,
@@ -62,21 +62,21 @@ class EventosController extends Controller
                 'lat' => $request->lat,
                 'lng' => $request->lng,
             ]);
-        
+
             $response = [
                 'msg' => "Evento cadastrado com sucesso",
                 'evento'=> $evento
             ];
-        
+
             return response($response,201);
-                
+
             } catch (Exception $th) {
                 return response()->json([
                     "mensagem"=>$th->getMessage()
                 ]);
             }
 
-           
+
     }
 
     public function update(Request $request, $id)
@@ -98,28 +98,27 @@ class EventosController extends Controller
                 'uf' => 'required',
                 'lat' => 'required',
                 'lng' => 'required',
-    
+
             ]);
 
             $evento = Evento::findOrFail($id);
-                      
+
             if ($request->imagem_evento != $evento->imagem_evento) {
                 if (Storage::exists('app/public/images/eventos/' .$evento->imagem_evento)) {
-                    Storage::delete('app/public/images/eventos/' .$evento->imagem_file);
+                    Storage::delete('app/public/images/eventos/' .$evento->imagem_evento);
                   // unlink(storage_path('app/public/images/eventos/' . $evento->imagem_file));
 
-                    $imagem_file = time() . '.' . explode('/', explode(':', substr($request->imagem_evento, 0, strpos($request->imagem_evento, ';')))[1])[1];
-                    Image::make($request->imagem_evento)->save(storage_path('app/public/images/eventos/' . $imagem_file));
+                    // $imagem_file = time() . '.' . explode('/', explode(':', substr($request->imagem_evento, 0, strpos($request->imagem_evento, ';')))[1])[1];
+                    // Image::make($request->imagem_evento)->save(storage_path('app/public/images/eventos/' . $imagem_file));
                 }
 
-                // $imagem_file = time() . '.' . explode('/', explode(':', substr($request->imagem_evento, 0, strpos($request->imagem_evento, ';')))[1])[1];
-                // Image::make($request->imagem_evento)->save(storage_path('app/public/images/eventos/' . $imagem_file));
-
+                 $imagem_file = time() . '.' . explode('/', explode(':', substr($request->imagem_evento, 0, strpos($request->imagem_evento, ';')))[1])[1];
+                 Image::make($request->imagem_evento)->save(storage_path('app/public/images/eventos/' . $imagem_file));
+                 
             }else{
                 $imagem_file = $evento->imagem_evento;
-
             }
-                     
+
              Evento::where('evento_id', $id)->update([
                 'titulo_evento' => $request->titulo_evento,
                 'imagem_evento' => $imagem_file,
@@ -140,30 +139,30 @@ class EventosController extends Controller
                 'lat' => $request->lat,
                 'lng' => $request->lng,
             ]);
-        
+
             $response = [
                 'msg' => "Evento editado com sucesso",
             ];
-        
+
             return response($response,201);
-                
+
             } catch (Exception $th) {
                 return response()->json([
                     "mensagem"=>$th->getMessage()
                 ]);
             }
 
-           
+
     }
-       
+
     public function getEventos($id)
     {
         $criador= Criador::find($id);
 
         if ($criador) {
-            
+
             $response = Evento::where('criador_id', $criador->criador_id)->get();
-              
+
             return response($response,200);
         }else{
             return response('criador não existe', 500);
@@ -176,7 +175,7 @@ class EventosController extends Controller
         $evento = Evento::find($id);
         if ($criador->criador_id == $evento->criador_id) {
             $response = $evento;
-              
+
             return response($response, 200);
         }else{
             return response('esse evento nao pertence a esse criador', 400);
@@ -187,7 +186,7 @@ class EventosController extends Controller
 
         $evento= Evento::where('nome','like','%'.$name.'%')->get();
 
-        
+
 
         if ($evento) {
           return response($evento, 200);
