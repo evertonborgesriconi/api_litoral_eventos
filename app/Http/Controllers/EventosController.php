@@ -106,7 +106,8 @@ class EventosController extends Controller
 
             if ($request->imagem_evento != $evento->imagem_evento) {
                 if (Storage::exists('app/public/images/eventos/' .$evento->imagem_evento)) {
-                    Storage::delete('app/public/images/eventos/' .$evento->imagem_evento);
+                    Storage::disk('public')->delete('app/public/images/eventos/' .$evento->imagem_evento);
+                    //Storage::delete('app/public/images/eventos/' .$evento->imagem_evento);
                   // unlink(storage_path('app/public/images/eventos/' . $evento->imagem_file));
 
                     // $imagem_file = time() . '.' . explode('/', explode(':', substr($request->imagem_evento, 0, strpos($request->imagem_evento, ';')))[1])[1];
