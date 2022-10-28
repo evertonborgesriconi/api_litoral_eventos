@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Evento;
 use App\Models\Criador;
 use Illuminate\Http\Request;
-use Intervention\Image\Image;
 use App\Http\Controllers\Controller;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
 class EventosController extends Controller
