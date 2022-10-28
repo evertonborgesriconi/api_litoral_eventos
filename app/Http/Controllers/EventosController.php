@@ -36,7 +36,7 @@ class EventosController extends Controller
 
             if ($request->imagem_evento) {
                 $imagem_file = time() . '.' . explode('/', explode(':', substr($request->imagem_evento, 0, strpos($request->imagem_evento, ';')))[1])[1];
-                Image::make($request->imagem_evento)->save('images/eventos/' . $imagem_file);
+                Image::make($request->imagem_evento)->save('/public/images/eventos/' . $imagem_file);
 
             }else{
                 $imagem_file = null;
