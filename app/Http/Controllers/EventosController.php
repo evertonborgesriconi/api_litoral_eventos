@@ -186,7 +186,7 @@ class EventosController extends Controller
 
     public function search($name){
 
-        $evento= Evento::where('nome','like','%'.$name.'%')->get();
+        $evento= Evento::where('titulo_evento','like','%'.$name.'%')->get();
 
         if ($evento) {
           return response($evento, 200);
