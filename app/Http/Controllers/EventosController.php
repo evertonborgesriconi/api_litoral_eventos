@@ -186,17 +186,14 @@ class EventosController extends Controller
 
     public function search($name){
 
-        $evento= Evento::where('titulo_evento','like','%'.$name.'%')->get();
+        $eventos = Evento::where('titulo_evento','LIKE','%'.$name.'%');
 
-        if ($evento) {
-          return response($evento, 200);
+        if ($eventos) {
+          return response($eventos, 200);
         }else{
             return response('eventos nao encontrado', 400);
         }
 
-        //ou tambem
-
-        //$produto= Produto::findOrFail($id);
     }
 
     public function getAllEventos(){
