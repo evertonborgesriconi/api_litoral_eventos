@@ -11,6 +11,7 @@ Route::post('/login', 'App\Http\Controllers\CriadorController@login');
 Route::get('/categorias', 'App\Http\Controllers\CategoriaController@index');
 Route::get('/assuntos', 'App\Http\Controllers\AssuntoController@index');
 Route::post('/logout', 'App\Http\Controllers\CriadorController@logout');
+Route::get('/search/:name','App\Http\Controllers\EventosController@search');
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -21,9 +22,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/registerevento', 'App\Http\Controllers\EventosController@register');
     Route::put('/editarevento/{id}', 'App\Http\Controllers\EventosController@update');
 
-    Route::get('/eventosidcriador/{id}', 'App\Http\Controllers\EventosController@getEventos');
+    Route::get('/eventosidcriador/{id}', 'App\Http\Controllers\EventosController@getEventosByIdCriador');
     Route::get('/eventosbyid/{id}/{criador_id}', 'App\Http\Controllers\EventosController@indexId');
-    
-  
+
+
 });
 

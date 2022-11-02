@@ -157,7 +157,7 @@ class EventosController extends Controller
 
     }
 
-    public function getEventos($id)
+    public function getEventosByIdCriador($id)
     {
         $criador= Criador::find($id);
 
@@ -188,8 +188,6 @@ class EventosController extends Controller
 
         $evento= Evento::where('nome','like','%'.$name.'%')->get();
 
-
-
         if ($evento) {
           return response($evento, 200);
         }else{
@@ -199,5 +197,11 @@ class EventosController extends Controller
         //ou tambem
 
         //$produto= Produto::findOrFail($id);
+    }
+
+    public function getAllEventos(){
+
+        return Evento::all();
+
     }
 }
