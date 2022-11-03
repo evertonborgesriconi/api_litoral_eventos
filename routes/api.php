@@ -12,6 +12,7 @@ Route::get('/categorias', 'App\Http\Controllers\CategoriaController@index');
 Route::get('/assuntos', 'App\Http\Controllers\AssuntoController@index');
 Route::post('/logout', 'App\Http\Controllers\CriadorController@logout');
 Route::get('/eventos','App\Http\Controllers\EventosController@getAllEventos');
+Route::get('/eventos/{uf}/{cidade}','App\Http\Controllers\EventosController@getAEventosByLocalization');
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
