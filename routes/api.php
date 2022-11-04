@@ -11,8 +11,9 @@ Route::post('/login', 'App\Http\Controllers\CriadorController@login');
 Route::get('/categorias', 'App\Http\Controllers\CategoriaController@index');
 Route::get('/assuntos', 'App\Http\Controllers\AssuntoController@index');
 Route::post('/logout', 'App\Http\Controllers\CriadorController@logout');
-Route::get('/eventos','App\Http\Controllers\EventosController@getAllEventos');
-Route::get('/eventos/{uf}/{cidade}','App\Http\Controllers\EventosController@getAEventosByLocalization');
+Route::get('/eventos', 'App\Http\Controllers\EventosController@getAllEventos');
+Route::get('/eventos/{uf}/{cidade}', 'App\Http\Controllers\EventosController@getAEventosByLocalization');
+Route::get('/evento/{id}', 'App\Http\Controllers\EventosController@getById');
 
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -25,7 +26,4 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/eventosidcriador/{id}', 'App\Http\Controllers\EventosController@getEventosByIdCriador');
     Route::get('/eventosbyid/{id}/{criador_id}', 'App\Http\Controllers\EventosController@indexId');
-
-
 });
-

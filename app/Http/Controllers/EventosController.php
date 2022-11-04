@@ -176,6 +176,19 @@ class EventosController extends Controller
         }
     }
 
+    public function getById($id)
+    {
+        $evento = Evento::find($id);
+        if ($evento) {
+            $response = $evento;
+
+            return response($response, 200);
+        } else {
+            return response('esse evento nao pertence a esse criador', 400);
+        }
+    }
+
+
     public function search($name)
     {
 
@@ -190,7 +203,6 @@ class EventosController extends Controller
 
     public function getAllEventos()
     {
-
         return Evento::all();
     }
 
