@@ -23,7 +23,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('/registerevento', 'App\Http\Controllers\EventosController@register');
     Route::put('/editarevento/{id}', 'App\Http\Controllers\EventosController@update');
+    Route::delete('/deleteevento/{id}', 'App\Http\Controllers\EventosController@deletar');
 
     Route::get('/eventosidcriador/{id}', 'App\Http\Controllers\EventosController@getEventosByIdCriador');
     Route::get('/eventosbyid/{id}/{criador_id}', 'App\Http\Controllers\EventosController@indexId');
+
+    Route::get('/getlocal/{id}', 'App\Http\Controllers\LocalIngressoController@getLocalByEvento');
+    Route::post('/registerlocalingresso', 'App\Http\Controllers\LocalIngressoController@register');
+    Route::delete('/deletelocal/{id}', 'App\Http\Controllers\LocalIngressoController@deletar');
+
+
 });

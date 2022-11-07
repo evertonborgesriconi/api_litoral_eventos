@@ -216,4 +216,19 @@ class EventosController extends Controller
             return response('eventos nao encontrado', 400);
         }
     }
+
+    public function deletar($id){
+
+        $evento = Evento::find($id);
+
+        if ($evento) {
+
+            $evento->delete();
+
+            return response('Evento deletado com sucesso', 200);
+
+        }else{
+            return response('Evento não existe', 200);
+        }
+    }
 }
