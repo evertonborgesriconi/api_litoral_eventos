@@ -6,6 +6,7 @@ use Exception;
 use App\Models\Evento;
 use App\Models\Criador;
 use Illuminate\Http\Request;
+use App\Models\LocalVendaIngresso;
 use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
@@ -222,6 +223,12 @@ class EventosController extends Controller
         $evento = Evento::find($id);
 
         if ($evento) {
+
+            $ingressos = LocalVendaIngresso::where('evento_id', $evento->evento_id)->get();
+
+            foreach ($ingressos as $value) {
+               $value->delete();
+            }
 
             $evento->delete();
 

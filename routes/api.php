@@ -15,6 +15,7 @@ Route::get('/eventos', 'App\Http\Controllers\EventosController@getAllEventos');
 Route::get('/eventos/{uf}/{cidade}', 'App\Http\Controllers\EventosController@getAEventosByLocalization');
 Route::get('/evento/{id}', 'App\Http\Controllers\EventosController@getById');
 
+Route::get('/getlocal/{id}', 'App\Http\Controllers\LocalIngressoController@getLocalByEvento');
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
@@ -28,7 +29,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/eventosidcriador/{id}', 'App\Http\Controllers\EventosController@getEventosByIdCriador');
     Route::get('/eventosbyid/{id}/{criador_id}', 'App\Http\Controllers\EventosController@indexId');
 
-    Route::get('/getlocal/{id}', 'App\Http\Controllers\LocalIngressoController@getLocalByEvento');
     Route::post('/registerlocalingresso', 'App\Http\Controllers\LocalIngressoController@register');
     Route::delete('/deletelocal/{id}', 'App\Http\Controllers\LocalIngressoController@deletar');
 
