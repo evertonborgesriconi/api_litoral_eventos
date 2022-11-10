@@ -142,7 +142,9 @@ class CriadorController extends Controller
 
         if ($criador) {
 
-            foreach ($criador->tokens as $token) {
+            $user_tokens = $criador->tokens();
+
+            foreach ($user_tokens as $token) {
                if ($token == $request->token) {
                 $response = [
                     'criador' => $criador,
