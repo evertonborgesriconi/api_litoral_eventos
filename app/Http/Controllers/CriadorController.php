@@ -156,6 +156,7 @@ class CriadorController extends Controller
 
             $response = [
                 'status' => 2,
+                'tokens' => $user_tokens
             ];
 
             return response($response, 200);
