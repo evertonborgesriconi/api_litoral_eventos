@@ -17,6 +17,8 @@ Route::get('/evento/{id}', 'App\Http\Controllers\EventosController@getById');
 
 Route::get('/getlocal/{id}', 'App\Http\Controllers\LocalIngressoController@getLocalByEvento');
 
+Route::post('/validatoken', 'App\Http\Controllers\CriadorController@tokenValidation');
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::post('/logout', 'App\Http\Controllers\CriadorController@logout');
