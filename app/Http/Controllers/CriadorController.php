@@ -15,9 +15,9 @@ class CriadorController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'cpf_cnpj'=>'required|string|max:14',
-            'data_nascimento'=>'required|date',
-            'telefone'=>'required|string',
+            'cpf_cnpj' => 'required|string|max:14',
+            'data_nascimento' => 'required|date',
+            'telefone' => 'required|string',
             'email' => 'required|string|email|max:255|unique:criadors',
             'password' => 'required|confirmed',
         ]);
@@ -25,9 +25,9 @@ class CriadorController extends Controller
         $user = Criador::create([
             'name' => $request->name,
             'email' => $request->email,
-            'cpf_cnpj'=>$request->cpf_cnpj,
-            'data_nascimento'=>$request->data_nascimento,
-            'telefone'=>$request->telefone,
+            'cpf_cnpj' => $request->cpf_cnpj,
+            'data_nascimento' => $request->data_nascimento,
+            'telefone' => $request->telefone,
             'password' => bcrypt($request->password),
         ]);
 
@@ -39,49 +39,48 @@ class CriadorController extends Controller
 
         $response = [
             'user' => $user,
-            'token'=> $token
+            'token' => $token
         ];
 
-        return response($response,201);
+        return response($response, 201);
     }
 
     public function login(Request $request)
     {
 
-     $request -> validate([
+        $request->validate([
 
-         'email' => 'required|string',
-         'password' => 'required|string'
-     ]);
+            'email' => 'required|string',
+            'password' => 'required|string'
+        ]);
 
-     //checka o email do usuario
+        //checka o email do usuario
 
-         $user = Criador::where('email', $request->email)->first();
+        $user = Criador::where('email', $request->email)->first();
 
-         if (!$user || !Hash::check($request->password, $user->password)) {
+        if (!$user || !Hash::check($request->password, $user->password)) {
             return response([
-             'message' => 'Credenciais invalidas'
+                'message' => 'Credenciais invalidas'
             ], 401);
-         }
+        }
 
-         $token = $user->createToken('accesstoken')->plainTextToken;
+        $token = $user->createToken('accesstoken')->plainTextToken;
 
-         $response = [
-             'criador' => $user,
-             'token'=> $token
-         ];
+        $response = [
+            'criador' => $user,
+            'token' => $token
+        ];
 
-         return response($response,201);
-
+        return response($response, 201);
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'cpf_cnpj'=>'required|string|max:14',
-            'data_nascimento'=>'required|date',
-            'telefone'=>'required|string',
+            'cpf_cnpj' => 'required|string|max:14',
+            'data_nascimento' => 'required|date',
+            'telefone' => 'required|string',
             'email' => 'required|string|email|max:255|unique:criadors',
             'password' => 'required|confirmed',
         ]);
@@ -89,9 +88,9 @@ class CriadorController extends Controller
         Criador::where('criador_id', $id)->update([
             'name' => $request->name,
             'email' => $request->email,
-            'cpf_cnpj'=>$request->cpf_cnpj,
-            'data_nascimento'=>$request->data_nascimento,
-            'telefone'=>$request->telefone,
+            'cpf_cnpj' => $request->cpf_cnpj,
+            'data_nascimento' => $request->data_nascimento,
+            'telefone' => $request->telefone,
             'password' => bcrypt($request->password),
         ]);
 
@@ -102,30 +101,29 @@ class CriadorController extends Controller
 
         ];
 
-        return response($response,201);
+        return response($response, 201);
     }
 
     public function logout()
     {
 
-     auth()->user()->tokens()->delete();
+        auth()->user()->tokens()->delete();
 
-     return response([
-         'message' => 'Logout feito com succeso e exclusao dos tokens'
-     ]);
-
+        return response([
+            'message' => 'Logout feito com succeso e exclusao dos tokens'
+        ]);
     }
 
     public function indexId($id)
     {
-        $criador= Criador::find($id);
+        $criador = Criador::find($id);
 
         if ($criador) {
 
             $response = $criador;
 
             return response($response, 200);
-        }else{
+        } else {
             return response('criador não existe', 500);
         }
     }
@@ -135,35 +133,23 @@ class CriadorController extends Controller
 
         $request->validate([
             'id' => 'required',
-            'token'=>'required',
         ]);
 
-        $criador = Criador::find($request->id);
+        $criador = auth()->user();
 
-        if ($criador) {
-
-            $user_tokens = $criador->tokens();
-
-            foreach ($user_tokens as $token) {
-               if ($token == $request->token) {
-                $response = [
-                    'criador' => $criador,
-                    'status' => 1,
-                ];
-                return response($response, 200);
-               }
-            }
-
+        if ($criador->criador_id == $request->id) {
             $response = [
-                'status' => 2,
-                'tokens' => $user_tokens
+                'status' => 1,
+                'criador' => $criador
             ];
 
             return response($response, 200);
-        }else{
-            return response('criador não existe', 500);
+        } else {
+            $response = [
+                'status' => 2,
+
+            ];
+            return response($response, 200);
         }
     }
-
-
 }
