@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('decricao_evento');
             $table->foreignId('categoria_id');
             $table->foreignId('assunto_id');
+            $table->integer('view');
             $table->date('data_inicio');
             $table->time('hora_inicio');
             $table->date('data_termino');

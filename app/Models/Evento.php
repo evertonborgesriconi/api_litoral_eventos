@@ -29,6 +29,7 @@ class Evento extends Model
         'uf',
         'lat',
         'lng',
+        'view',
     ];
 
 
@@ -39,7 +40,7 @@ class Evento extends Model
         //Relação de N para 1
 
         return $this->belongsTo(Criador::class, 'criador_id');
-       
+
     }
 
     public function categoria()
@@ -47,7 +48,7 @@ class Evento extends Model
         //Relação de N para 1
 
         return $this->belongsTo(Categoria::class, 'categoria_id');
-       
+
     }
 
     public function assunto()
@@ -55,6 +56,6 @@ class Evento extends Model
         //Relação de N para 1
 
         return $this->belongsTo(Assunto::class, 'assunto_id');
-       
+
     }
 }

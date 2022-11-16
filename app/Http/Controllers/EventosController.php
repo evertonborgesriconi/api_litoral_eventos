@@ -238,4 +238,23 @@ class EventosController extends Controller
             return response('Evento não existe', 200);
         }
     }
+
+    public function addview(Request $request){
+
+        $evento = Evento::find($request->evento_id);
+        $view = $evento->view + 1;
+        if ($evento) {
+            Evento::where('evento_id', $request->evento_id)->update([
+                'view' => $view,
+            ]);
+
+            return response('View adicionado com sucesso', 200);
+
+        }else{
+            return response('Evento não existe', 200);
+        }
+    }
+
+
+
 }
