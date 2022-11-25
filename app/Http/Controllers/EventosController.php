@@ -181,7 +181,7 @@ class EventosController extends Controller
     {
         $evento = Evento::find($id);
         if ($evento) {
-            $response = $evento->criador();
+            $response = $evento;
 
             return response($response, 200);
         } else {
