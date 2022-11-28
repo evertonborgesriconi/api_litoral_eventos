@@ -183,7 +183,13 @@ class EventosController extends Controller
     {
         $evento = Evento::find($id);
         if ($evento) {
-            $response = $evento;
+            $assunto = Assunto::find($evento->assunto_id);
+            $categoria = Categoria::find($evento->categoria_id);
+            $response = [
+                "evento" => $evento,
+                "assunto" => $assunto,
+                "categoria" => $categoria,
+            ];
 
             return response($response, 200);
         } else {
