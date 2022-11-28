@@ -14,7 +14,6 @@ Route::post('/logout', 'App\Http\Controllers\CriadorController@logout');
 Route::get('/eventos', 'App\Http\Controllers\EventosController@getAllEventos');
 Route::get('/eventos/{uf}/{cidade}', 'App\Http\Controllers\EventosController@getAEventosByLocalization');
 Route::get('/evento/{id}', 'App\Http\Controllers\EventosController@getById');
-Route::get('/buscacatassunto/{id_assunto)/{id_categoria}', 'App\Http\Controllers\EventosController@getCatAsu');
 
 Route::get('/getlocal/{id}', 'App\Http\Controllers\LocalIngressoController@getLocalByEvento');
 

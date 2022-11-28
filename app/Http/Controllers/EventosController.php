@@ -181,7 +181,7 @@ class EventosController extends Controller
 
     public function getById($id)
     {
-        $evento = Evento::find($id);
+        $evento = Evento::find($id)->categoria()->assunto();
         if ($evento) {
             $response = $evento;
 
@@ -256,28 +256,4 @@ class EventosController extends Controller
             return response('Evento não existe', 200);
         }
     }
-
-    public function getCatAsu($id_assunto, $id_categoria){
-
-        $assunto = Assunto::find($id_assunto);
-        $categoria = Categoria::find($id_categoria);
-
-        if ($assunto && $categoria) {
-
-            $response = [
-                'assunto' => $assunto,
-                'categoria' => $categoria,
-            ];
-
-            return response($response, 200);
-
-        }else{
-            return response('Categoria ou evento não encontrado', 200);
-        }
-    }
-
-
-
-
-
 }
