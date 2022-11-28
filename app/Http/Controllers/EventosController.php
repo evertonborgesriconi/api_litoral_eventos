@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Evento;
 use App\Models\Criador;
+use App\Models\Assunto;
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 use App\Models\LocalVendaIngresso;
 use App\Http\Controllers\Controller;
@@ -254,6 +256,27 @@ class EventosController extends Controller
             return response('Evento não existe', 200);
         }
     }
+
+    public function getCatAsu($id_assunto, $id_categoria){
+
+        $assunto = Assunto::find($id_assunto);
+        $categoria = Categoria::find($id_categoria);
+
+        if ($assunto && $categoria) {
+
+            $response = [
+                'assunto' => $assunto,
+                'categoria' => $categoria,
+            ];
+
+            return response($response, 200);
+
+        }else{
+            return response('Categoria ou evento não encontrado', 200);
+        }
+    }
+
+
 
 
 
