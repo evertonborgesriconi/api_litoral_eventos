@@ -181,9 +181,9 @@ class EventosController extends Controller
 
     public function getById($id)
     {
-        $evento = Evento::find($id)->categoria()->assunto();
+        $evento = Evento::find($id);
         if ($evento) {
-            $response = $evento;
+            $response = $evento->categoria()->assunto();
 
             return response($response, 200);
         } else {
